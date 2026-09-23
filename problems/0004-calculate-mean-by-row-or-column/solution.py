@@ -1,16 +1,25 @@
-import numpy as np
-
 def calculate_matrix_mean(matrix: list[list[float]], mode: str) -> list[float]:
 
-    matrix = np.array(matrix)
+    means = []
 
     if mode == "row":
-        means = np.mean(matrix, axis=1)
+
+        for row in matrix:
+            total = 0
+
+            for value in row:
+                total += value
+
+            means.append(total / len(row))
 
     elif mode == "column":
-        means = np.mean(matrix, axis=0)
 
-    else:
-        return []
+        for col in range(len(matrix[0])):
+            total = 0
 
-    return means.tolist()
+            for row in matrix:
+                total += row[col]
+
+            means.append(total / len(matrix))
+
+    return means
